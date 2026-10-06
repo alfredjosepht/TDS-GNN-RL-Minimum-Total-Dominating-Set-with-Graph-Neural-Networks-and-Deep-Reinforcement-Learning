@@ -1,0 +1,9 @@
+# Base-paper-faithful model (Section 8.1 item 5): paper reward, mask v not in S only,
+# no reduction rule, sum readout, MSE loss, replay buffer 500 (paper Sec. 4.3.1).
+# Its own forbidding rule (no v in N[picked]) is NOT used: it can never yield a TDS.
+inherit: default.yaml
+# Ablations use 100k steps (budget); compare against ablation_baseline_100k, not the 300k main model.
+model: {readout: sum}
+env: {reward_mode: paper, mask_mode: notin, use_forced: false}
+train: {total_steps: 100000, loss: mse, buffer_size: 500, warmup: 500}
+out: {name: paper_faithful}

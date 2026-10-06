@@ -1,0 +1,10 @@
+# E3: scale (n = 1e4, 5e4, 1e5; sparse ER and BA). ILP limited to 600 s.
+name: e3
+sets: ["data/test/e3/*.npz"]
+out: results/e3/raw.csv
+methods:
+  - {type: greedy}
+  - {type: greedy_rr}
+  - {type: greedy_rr_ls, ls_time: 1.0}
+  - {type: rl, label: ours, checkpoints: ["checkpoints/default_seed0/best.pt", "checkpoints/default_seed1/best.pt", "checkpoints/default_seed2/best.pt", "checkpoints/default_seed3/best.pt", "checkpoints/default_seed4/best.pt"], ls_time: 1.0, multi_select: auto}
+  - {type: ilp, time_limit: 600, threads: 8}

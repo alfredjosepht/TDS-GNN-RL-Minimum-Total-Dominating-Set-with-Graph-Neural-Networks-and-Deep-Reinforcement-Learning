@@ -1,0 +1,6 @@
+# E5: action mask v not in S only (no gain > 0 pruning)
+inherit: default.yaml
+# Ablations use 100k steps (budget); compare against ablation_baseline_100k, not the 300k main model.
+env: {mask_mode: notin}
+train: {total_steps: 100000}
+out: {name: abl_mask_notin}

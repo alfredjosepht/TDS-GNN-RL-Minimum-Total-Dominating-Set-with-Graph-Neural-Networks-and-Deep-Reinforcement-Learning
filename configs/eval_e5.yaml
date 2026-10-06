@@ -1,0 +1,21 @@
+# E5: ablations on the held-out mixed sets. RR on/off and LS on/off come from the
+# rl / rl_rr / rl_rr_ls rows of each model. Ablations are trained for 100k steps; compare
+# them with `baseline_100k` (same budget). `ours` = the 300k-step main model (5 seeds).
+name: e5
+sets: ["data/test/e5/*.npz"]
+out: results/e5/raw.csv
+methods:
+  - {type: greedy_rr}
+  - {type: greedy_rr_ls, ls_time: 1.0}
+  - {type: ilp, time_limit: 60, threads: 8}
+  - {type: rl, label: ours, checkpoints: ["checkpoints/default_seed0/best.pt", "checkpoints/default_seed1/best.pt", "checkpoints/default_seed2/best.pt", "checkpoints/default_seed3/best.pt", "checkpoints/default_seed4/best.pt"], ls_time: 1.0}
+  - {type: rl, label: baseline_100k, checkpoints: [checkpoints/abl_baseline_100k_seed0/best.pt], ls_time: 1.0}
+  - {type: rl, label: reward_shaped, checkpoints: [checkpoints/abl_reward_shaped_seed0/best.pt], ls_time: 1.0}
+  - {type: rl, label: reward_paper, checkpoints: [checkpoints/abl_reward_paper_seed0/best.pt], ls_time: 1.0}
+  - {type: rl, label: mask_notin, checkpoints: [checkpoints/abl_mask_notin_seed0/best.pt], ls_time: 1.0}
+  - {type: rl, label: no_forced, checkpoints: [checkpoints/abl_no_forced_seed0/best.pt], ls_time: 1.0}
+  - {type: rl, label: enc_gin, checkpoints: [checkpoints/abl_gin_seed0/best.pt], ls_time: 1.0}
+  - {type: rl, label: enc_gat, checkpoints: [checkpoints/abl_gat_seed0/best.pt], ls_time: 1.0}
+  - {type: rl, label: readout_sum, checkpoints: [checkpoints/abl_readout_sum_seed0/best.pt], ls_time: 1.0}
+  - {type: rl, label: nstep3, checkpoints: [checkpoints/abl_nstep3_seed0/best.pt], ls_time: 1.0}
+  - {type: rl, label: paper_faithful, checkpoints: [checkpoints/paper_faithful_seed0/best.pt], rr: false}

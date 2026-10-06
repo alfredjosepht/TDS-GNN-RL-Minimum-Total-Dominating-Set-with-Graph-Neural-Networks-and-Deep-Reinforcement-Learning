@@ -1,0 +1,5 @@
+# Smoke test: 5k steps.
+inherit: default.yaml
+train: {total_steps: 5000, log_every: 250}
+val: {every: 1000}
+out: {name: quick}

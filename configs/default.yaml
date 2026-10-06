@@ -1,0 +1,26 @@
+# Main model (Sections 6-7). All values equal tds/config.py DEFAULTS; listed for visibility.
+seed: 0
+device: auto
+model: {hidden: 64, layers: 3, encoder: mpnn, readout: meanmax}
+env: {reward_mode: unit, shaped_beta: 0.5, paper_alpha: 1.0, use_forced: true, mask_mode: gain}
+train:
+  total_steps: 300000
+  num_envs: 8
+  buffer_size: 100000
+  batch_size: 64
+  warmup: 2000
+  train_every: 2
+  lr: 1.0e-4
+  gamma: 1.0
+  n_step: 1
+  loss: huber
+  grad_clip: 10.0
+  target_update: soft
+  tau: 0.005
+  eps_start: 1.0
+  eps_end: 0.05
+  eps_frac: 0.3
+  curriculum: [[0.4, 20, 50], [1.0, 20, 100]]
+  families: {er: 0.30, ba: 0.25, ws: 0.15, rgg: 0.15, lattice: 0.15}
+val: {every: 5000, path: data/val_set.npz, count: 200, n_min: 50, n_max: 100, ilp_time: 60}
+out: {name: default}

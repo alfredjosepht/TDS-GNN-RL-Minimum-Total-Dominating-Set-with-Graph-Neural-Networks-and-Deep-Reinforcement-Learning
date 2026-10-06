@@ -1,0 +1,4 @@
+# Reference for E5: the default model trained with the same 100k-step budget as the ablations.
+inherit: default.yaml
+train: {total_steps: 100000}
+out: {name: abl_baseline_100k}

@@ -1,0 +1,10 @@
+# E2: lattices, zero-shot (grid, triangular, hexagonal up to ~2500 vertices).
+name: e2
+sets: ["data/test/e2/*.npz"]
+out: results/e2/raw.csv
+methods:
+  - {type: greedy}
+  - {type: greedy_rr}
+  - {type: greedy_rr_ls, ls_time: 1.0}
+  - {type: ilp, time_limit: 60, threads: 8}
+  - {type: rl, label: ours, checkpoints: ["checkpoints/default_seed0/best.pt", "checkpoints/default_seed1/best.pt", "checkpoints/default_seed2/best.pt", "checkpoints/default_seed3/best.pt", "checkpoints/default_seed4/best.pt"], ls_time: 1.0}

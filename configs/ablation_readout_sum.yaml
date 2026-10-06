@@ -1,0 +1,6 @@
+# E5: graph summary = sum over vertices (base paper) instead of concat(mean, max)
+inherit: default.yaml
+# Ablations use 100k steps (budget); compare against ablation_baseline_100k, not the 300k main model.
+model: {readout: sum}
+train: {total_steps: 100000}
+out: {name: abl_readout_sum}

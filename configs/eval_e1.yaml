@@ -1,0 +1,12 @@
+# E1: random graphs. 7 families x n in {20,...,1000}; 50 graphs per cell, 20 for n >= 500
+# (to bound ILP time; the first 20 graphs of each saved set are used).
+name: e1
+sets: ["data/test/e1/*.npz"]
+out: results/e1/raw.csv
+max_graphs_large: {min_n: 500, count: 20}
+methods:
+  - {type: greedy}
+  - {type: greedy_rr}
+  - {type: greedy_rr_ls, ls_time: 1.0}
+  - {type: ilp, time_limit: 60, threads: 8}
+  - {type: rl, label: ours, checkpoints: ["checkpoints/default_seed0/best.pt", "checkpoints/default_seed1/best.pt", "checkpoints/default_seed2/best.pt", "checkpoints/default_seed3/best.pt", "checkpoints/default_seed4/best.pt"], ls_time: 1.0}

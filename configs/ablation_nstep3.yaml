@@ -1,0 +1,5 @@
+# E5: 3-step returns
+inherit: default.yaml
+# Ablations use 100k steps (budget); compare against ablation_baseline_100k, not the 300k main model.
+train: {total_steps: 100000, n_step: 3}
+out: {name: abl_nstep3}

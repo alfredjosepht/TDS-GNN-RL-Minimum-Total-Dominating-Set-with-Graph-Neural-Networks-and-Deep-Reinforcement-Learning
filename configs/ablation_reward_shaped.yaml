@@ -1,0 +1,6 @@
+# E5: potential-based shaped reward (Section 4.5)
+inherit: default.yaml
+# Ablations use 100k steps (budget); compare against ablation_baseline_100k, not the 300k main model.
+env: {reward_mode: shaped, shaped_beta: 0.5}
+train: {total_steps: 100000}
+out: {name: abl_reward_shaped}
